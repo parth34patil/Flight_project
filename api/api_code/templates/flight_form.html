@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flight Search</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body>
+    <div class="container" style="background: transparent; box-shadow: none">
+      <h1>Search Flights</h1>
+      <form method="get" action="{% url 'search_flight' %}">
+        <label for="from">From</label>
+        <input
+          type="text"
+          id="from"
+          name="from"
+          placeholder="City or Airport"
+          required
+        />
+
+        <label for="to">To</label>
+        <input
+          type="text"
+          id="to"
+          name="to"
+          placeholder="City or Airport"
+          required
+        />
+
+        <label for="departure_date">Departure Date</label>
+        <input type="date" id="departure_date" name="departure_date" required />
+
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </body>
+</html>

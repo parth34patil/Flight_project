@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flight Results</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <style>
+      .flight-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0;
+      }
+      .flight-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 120px;
+        flex: 1;
+      }
+      .flight-times {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+      }
+      .flight-duration {
+        color: #b0b3b8;
+        font-size: 1rem;
+      }
+      .flight-stops {
+        color: #ffb300;
+        font-weight: 500;
+        font-size: 1rem;
+      }
+      .flight-route {
+        color: #b0b3b8;
+        font-size: 1rem;
+      }
+      .flight-details {
+        color: #b0b3b8;
+        font-size: 1rem;
+      }
+      .flight-price {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #4caf50;
+        min-width: 120px;
+        text-align: right;
+      }
+      .flight-logo {
+        margin-right: 24px;
+      }
+      @media (max-width: 900px) {
+        .flight-card {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .flight-price {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>All flights</h1>
+      <p style="color: #b0b3b8; font-size: 0.95rem; margin-bottom: 18px">
+        Prices include required taxes + fees for 1 adult. Optional charges and
+        bag fees may apply.
+      </p>
+      {% if flights %}
+      <div class="flight-card-list">
+        {% for flight in flights %}
+        <div class="flight-card">
+          <div class="flight-logo">&#9992;</div>
+          <div class="flight-col flight-times" style="margin-right: 24px">
+            <span style="white-space: nowrap; font-weight: 600"
+              >Date of Journey: {{ flight.departure_time|date:"d M Y" }}</span
+            >
+          </div>
+          <div class="flight-col flight-duration" style="margin-right: 24px">
+            {% if flight.duration %}{{ flight.duration }}{% else %}--{% endif %}
+          </div>
+          <div class="flight-col flight-stops" style="margin-right: 24px">
+            1 stop
+          </div>
+          <div class="flight-col flight-route" style="margin-right: 24px">
+            {{ flight.origin }}&ndash;{{ flight.destination }}
+          </div>
+          <div class="flight-col flight-details" style="margin-right: 24px">
+            {{ flight.airline }}, {{ flight.flight_number }}
+          </div>
+          <div class="flight-price">₹{{ flight.price }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>No flights found.</p>
+      {% endif %}
+      <br />
+      <a
+        href="{% url 'flight_form' %}"
+        style="color: #8ab4f8; text-decoration: none; font-weight: 500"
+        >&#x1F519; Back to search</a
+      >
+    </div>
+  </body>
+</html>
